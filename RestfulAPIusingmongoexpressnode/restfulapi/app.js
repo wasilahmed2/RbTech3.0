@@ -57,6 +57,10 @@ app.get("/", checkAuthenticated, (req, res) => {
   res.render("index.pug");
 });
 
+app.get("/products", checkAuthenticated, (req, res) => {
+  res.render("products.pug")
+})
+
 app.get("/login", checkNotAuthenticated, (req, res) => {
   res.render("login.pug");
 });
@@ -87,7 +91,7 @@ app.post("/register", checkNotAuthenticated, async (req, res) => {
 });
 
 app.use("/api/users", usersRouter);
-app.use("/products", prodRouter);
+// app.use("/products", prodRouter);
 app.use("/api/products", productsRouter);
 app.use("/login", loginRouter);
 
