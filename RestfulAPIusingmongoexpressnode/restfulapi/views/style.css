@@ -1,0 +1,375 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+body {
+  background-image: linear-gradient(
+      rgba(255, 255, 153, 0.3),
+      rgba(255, 255, 153, 0.3)
+    ),
+    url(https://i.imgur.com/yHpcZAn.jpg);
+  background-size: 100% 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* .parallax {
+  
+  background-image: linear-gradient(
+      rgba(255, 255, 153, 0.3),
+      rgba(255, 255, 153, 0.3)
+    ),
+    url(./images/Background-wall.jpg);
+
+  
+  height: 100%;
+
+  
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+} */
+
+.header {
+  height: 90%;
+}
+
+.header2 {
+  height: 10%;
+}
+
+/* .Build-Gallery {
+  height: 100%;
+  background-image: linear-gradient(
+      rgba(255, 255, 153, 0.3),
+      rgba(255, 255, 153, 0.3)
+    ),
+    url(./images/Background-wall.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+
+  
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+} */
+
+.navbar::before {
+  content: "";
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  background: linear-gradient(
+    to right,
+    #fafa5e77 0%,
+    #fafa5e77 0%,
+    #fafa5e77 100%
+  );
+}
+
+.searchbar {
+  margin-bottom: auto;
+  margin-top: auto;
+  height: 60px;
+  background-color: #353b48;
+  border-radius: 30px;
+  padding: 10px;
+}
+
+.search_input {
+  color: white;
+  border: 0;
+  outline: 0;
+  background: none;
+  width: 0;
+  caret-color: transparent;
+  line-height: 40px;
+  transition: width 0.4s linear;
+}
+
+.searchbar:hover > .search_input {
+  padding: 0 10px;
+  width: 150px;
+  caret-color: red;
+  transition: width 0.4s linear;
+}
+
+.searchbar:hover > .search_icon {
+  background: white;
+  color: #e74c3c;
+}
+
+.search_icon {
+  height: 40px;
+  width: 40px;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: white;
+  text-decoration: none;
+}
+
+.navbar-toggler {
+  border-radius: 0%;
+  cursor: pointer;
+}
+
+.navbar-nav {
+  margin-right: auto;
+}
+
+.loginnav {
+  margin-left: auto;
+}
+
+.d-flex {
+  justify-content: center;
+  height: -100px;
+}
+
+.container {
+  text-transform: uppercase;
+  padding-top: 2px;
+}
+
+.custom-toggler .navbar-toggler-icon {
+  background-image: url(https://svgshare.com/i/Ndt.svg);
+}
+
+.custom-toggler.navbar-toggler {
+  border-color: rgb(0, 0, 0);
+}
+.nav-item a {
+  color: black;
+  font-weight: bold;
+}
+
+.container a {
+  color: black;
+  font-weight: bold;
+}
+
+.header-section {
+  color: black;
+  text-align: center;
+  /* position: fixed;
+  width: 500px;
+  height: 200px;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px; 
+  margin-left: -250px; */
+}
+
+.center-div {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+}
+
+.header-buttons a {
+  border: 1px solid;
+  color: black;
+  border-radius: 100px;
+  margin: 0 5px;
+  padding: 12px 35px;
+  outline: none;
+  font: 1rem;
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.header-buttons a:hover {
+  color: yellow;
+  background: black;
+  text-decoration: none;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);
+}
+
+.gallery-title {
+  font-size: 36px;
+  color: black;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 70px;
+}
+.gallery-title:after {
+  content: "";
+  position: absolute;
+  width: 7.5%;
+  left: 46.5%;
+  height: 45px;
+  border-bottom: 1px solid #5e5e5e;
+}
+
+.port-image {
+  width: 100%;
+}
+
+.gallery_product {
+  margin-bottom: 30px;
+}
+
+.product-title {
+  font-size: 50px;
+  color: black;
+  font-weight: bold;
+  font-variant-caps: all-petite-caps;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 70px;
+}
+
+.products-card {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 300px;
+  height: 400px;
+  background: black;
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 0;
+  transform: scale(0.95);
+  transition: box-shadow 0.5s ease-in-out, transform 0.5s ease-in-out;
+  overflow: hidden;
+}
+.card:hover {
+  transform: scale(1);
+  box-shadow: 5px 20px 30px rgba(0, 0, 0, 0.2);
+}
+.imgBox {
+  width: 100%;
+  height: 80%;
+  overflow: hidden;
+}
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.details {
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  background: yellow;
+  padding: 10px 20px;
+  bottom: -30%;
+  transition: 0.5s;
+}
+.details:hover {
+  bottom: 0;
+}
+.textContent {
+  position: relative;
+  margin-top: 10px;
+  color: #555;
+}
+h3 {
+  font-size: 20px;
+  padding: 10px 0;
+  font-weight: bold;
+  margin-bottom: 7px;
+  cursor: pointer;
+  display: flex;
+}
+.price {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 30px;
+}
+
+.Buy-btn {
+  width: 100%;
+  padding: 5px 0;
+  margin: 10px 0;
+  background: #45b9e0;
+  color: #fff;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.Buy-btn:hover {
+  background: #5acef4;
+}
+.description {
+  background: #92879b;
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  top: -70px;
+  right: -70px;
+  border-radius: 0 0 200px 200px;
+  transition: all 0.5s, border-radius 1s, top 1s;
+}
+.description .icon {
+  position: absolute;
+  top: 85px;
+  right: 85px;
+  color: #fff;
+  opacity: 1;
+}
+.description:hover {
+  width: 100%;
+  height: 80%;
+  right: 0;
+  top: 0;
+  border-radius: 0;
+}
+.description:hover .icon {
+  opacity: 0;
+}
+.description .contents {
+  color: #fff;
+  padding: 5%;
+  transform: scale(0.5);
+  transform: translateY(-200%);
+  transition: opacity 0.2s, transform 0.8s;
+  opacity: 0;
+}
+.description:hover .contents {
+  transform: scale(1);
+  opacity: 1;
+  transform: translateY(0);
+}
+.description h2 {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.loginbtn {
+  border-style: none;
+  background-color: rgba(0, 0, 0, 0);
+  font-weight: bold;
+}
