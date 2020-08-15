@@ -74,7 +74,7 @@ app.get("/products", (req, res) => {
   res.render("products.pug");
 });
 app.get("/crud", checkAuthenticated, (req, res) => {
-  res.sendFile(path.join(__dirname,"crud.html"));
+  res.sendFile(path.join(__dirname, "crud.html"));
 });
 
 app.get("/login", checkNotAuthenticated, (req, res) => {
@@ -174,7 +174,13 @@ app.put("/:id", (req, res) => {
     .collection(collection)
     .findOneAndUpdate(
       { _id: db.getPrimaryKey(prodID) },
-      { $set: { name: userInput.name, price: userInput.price, description: userInput.description } },
+      {
+        $set: {
+          name: userInput.name,
+          price: userInput.price,
+          description: userInput.description,
+        },
+      },
       { returnOriginal: false },
       (err, result) => {
         if (err) console.log(err);
