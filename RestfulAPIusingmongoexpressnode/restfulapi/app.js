@@ -1,5 +1,5 @@
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
 }
 
 var createError = require("http-errors");
@@ -17,18 +17,23 @@ var config = require("config");
 const router = require("./routes/index");
 const app = express();
 const bcrypt = require("bcrypt");
-const flash = require('express-flash')
-const session = require('express-session')
+const flash = require("express-flash");
+const session = require("express-session");
 // const methodOverride = require('method-override') //not working for logout
+const bodyParser = require("body-parser");
 
 const initializePassport = require("./passport-config");
 const passport = require("passport");
-initializePassport(passport, (email) =>
-  users.find((user) => user.email === email),
-  id => users.find(user => user.id === id)
+initializePassport(
+  passport,
+  (email) => users.find((user) => user.email === email),
+  (id) => users.find((user) => user.id === id)
 );
 
 const users = [];
+const db = require("./db");
+const { result } = require("lodash");
+const collection = "todo";
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -37,15 +42,17 @@ app.set("view engine", "pug");
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(flash())
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false
-}))
+app.use(flash());
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
-app.use(passport.initialize())
-app.use(passport.session())
+app.use(passport.initialize());
+app.use(passport.session());
 // app.use(methodOverride('_method')) //not working for logout
 
 app.use(cookieParser());
@@ -53,23 +60,29 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // app.use("/", indexRouter);
 
+app.use(bodyParser.json());
+
 app.get("/", checkAuthenticated, (req, res) => {
   res.render("index.pug");
 });
 
 app.get("/products", checkAuthenticated, (req, res) => {
-  res.render("products.pug")
-})
+  res.render("products.pug");
+});
 
 app.get("/login", checkNotAuthenticated, (req, res) => {
   res.render("login.pug");
 });
 
-app.post("/login", checkNotAuthenticated, passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/login',
-  failureFlash: true
-}));
+app.post(
+  "/login",
+  checkNotAuthenticated,
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/login",
+    failureFlash: true,
+  })
+);
 
 app.get("/register", checkNotAuthenticated, (req, res) => {
   res.render("register.pug");
@@ -96,12 +109,12 @@ app.use("/api/products", productsRouter);
 app.use("/login", loginRouter);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+/* app.use(function (req, res, next) {
   next(createError(404));
-});
+}); */
 
 // error handler
-app.use(function (err, req, res, next) {
+/* app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
@@ -116,26 +129,75 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => console.log("Connected to Mongo...."))
-  .catch((error) => console.log(error.message));
+  .catch((error) => console.log(error.message)); //for logout not working
+*/
+db.connect((err) => {
+  if (err) {
+    console.log("unable to connect");
+    process.exit(1);
+  } else {
+    console.log("Connected");
+  }
+});
+
+app.get("/crud", (req, res) => {
+  res.sendFile(path.join(__dirname, "crud.html"));
+});
+
+app.get("/getProds", (req, res) => {
+  db.getDB()
+    .collection(collection)
+    .find({})
+    .toArray((err, documents) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(documents);
+        res.json(documents);
+      }
+    });
+});
+
+// update
+app.put("/:id", (req, res) => {
+  // Primary Key of Todo Document we wish to update
+  const todoID = req.params.id;
+  // Document used to update
+  const userInput = req.body;
+  // Find Document By ID and Update
+  db.getDB()
+    .collection(collection)
+    .findOneAndUpdate(
+      { _id: db.getPrimaryKey(todoID) },
+      { $set: { todo: userInput.todo } },
+      { returnOriginal: false },
+      (err, result) => {
+        if (err) console.log(err);
+        else {
+          res.json(result);
+        }
+      }
+    );
+});
 
 /*app.delete('/logout', (req, res) => {
  req.logOut()
  res.redirect('/login')
-}) */ //for logout not working
+}) */
 
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
-    return next()
+    return next();
   }
 
-  res.redirect('/login')
+  res.redirect("/login");
 }
 
 function checkNotAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
-    return res.redirect('/')
+    return res.redirect("/");
   }
-  next()
+  next();
 }
 
 module.exports = app;
