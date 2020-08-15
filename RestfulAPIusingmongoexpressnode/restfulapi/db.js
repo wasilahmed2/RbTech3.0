@@ -1,6 +1,6 @@
 const MongoClient = require("mongodb").MongoClient;
 const ObjectID = require("mongodb").ObjectID;
-const dbname = "crud_mongodb";
+const dbname = "products";
 const url = "mongodb://localhost:27017";
 const mongoOptions = { useNewUrlParser: true };
 
@@ -31,4 +31,4 @@ const getDB = () => {
   return state.db;
 };
 
-module.exports = { getDB, connect, getPrimaryKey };
+module.exports = { getDB, connect, getPrimaryKey};

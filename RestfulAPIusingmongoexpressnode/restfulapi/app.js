@@ -33,7 +33,7 @@ initializePassport(
 const users = [];
 const db = require("./db");
 const { result } = require("lodash");
-const collection = "todo";
+const collection = "products";
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -50,6 +50,10 @@ app.use(
     saveUninitialized: false,
   })
 );
+
+//app.use(bodyParser.json());
+
+// serve static html file to user
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -68,6 +72,9 @@ app.get("/", checkAuthenticated, (req, res) => {
 
 app.get("/products", checkAuthenticated, (req, res) => {
   res.render("products.pug");
+});
+app.get("/crud", (req, res) => {
+  res.sendFile(path.join(__dirname,"crud.html"));
 });
 
 app.get("/login", checkNotAuthenticated, (req, res) => {
@@ -114,7 +121,7 @@ app.use("/login", loginRouter);
 }); */
 
 // error handler
-/* app.use(function (err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
@@ -130,7 +137,7 @@ mongoose
   })
   .then(() => console.log("Connected to Mongo...."))
   .catch((error) => console.log(error.message)); //for logout not working
-*/
+
 db.connect((err) => {
   if (err) {
     console.log("unable to connect");
@@ -140,20 +147,18 @@ db.connect((err) => {
   }
 });
 
-app.get("/crud", (req, res) => {
-  res.sendFile(path.join(__dirname, "crud.html"));
-});
-
-app.get("/getProds", (req, res) => {
+// read
+app.get("/getProducts", (req, res) => {
+  // get all Todo documents within our todo collection
+  // send back to user as json
   db.getDB()
     .collection(collection)
     .find({})
     .toArray((err, documents) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log(documents);
+      if (err) console.log(err);
+      else {
         res.json(documents);
+        // console.log(documents);
       }
     });
 });
@@ -161,15 +166,15 @@ app.get("/getProds", (req, res) => {
 // update
 app.put("/:id", (req, res) => {
   // Primary Key of Todo Document we wish to update
-  const todoID = req.params.id;
+  const prodID = req.params.id;
   // Document used to update
   const userInput = req.body;
   // Find Document By ID and Update
   db.getDB()
     .collection(collection)
     .findOneAndUpdate(
-      { _id: db.getPrimaryKey(todoID) },
-      { $set: { todo: userInput.todo } },
+      { _id: db.getPrimaryKey(prodID) },
+      { $set: { name: userInput.name, price: userInput.price } },
       { returnOriginal: false },
       (err, result) => {
         if (err) console.log(err);
@@ -180,10 +185,45 @@ app.put("/:id", (req, res) => {
     );
 });
 
-/*app.delete('/logout', (req, res) => {
- req.logOut()
- res.redirect('/login')
-}) */
+//create
+app.post("/", (req, res) => {
+  const userInput = req.body;
+  db.getDB()
+    .collection(collection)
+    .insertOne(userInput, (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.json({ result: result, document: result.ops[0] });
+      }
+    });
+});
+// Validate document
+// If document is invalid pass to error middleware
+// else insert document within todo collection
+
+//delete
+app.delete("/:id", (req, res) => {
+  // Primary Key of Todo Document
+  const prodID = req.params.id;
+  // Find Document By ID and delete document from record
+  db.getDB()
+    .collection(collection)
+    .findOneAndDelete({ _id: db.getPrimaryKey(prodID) }, (err, result) => {
+      if (err) console.log(err);
+      else res.json(result);
+    });
+});
+
+// Middleware for handling Error
+// Sends Error Response Back to User
+app.use((err, req, res, next) => {
+  res.status(err.status).json({
+    error: {
+      message: err.message,
+    },
+  });
+});
 
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {

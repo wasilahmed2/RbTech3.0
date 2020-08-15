@@ -30,6 +30,8 @@ catch(err){
 }
 });
 
+
+
 //update record
 router.put("/:id", validateProduct ,async(req,res)=>{
     let product= await Product.findById(req.params.id);

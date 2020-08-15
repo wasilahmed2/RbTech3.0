@@ -86,46 +86,46 @@
                 }
             }
 
-            const getTodos = () => {
-                fetch('/getTodos', { method: "get" }).then((response) => {
+            const getProducts = () => {
+                fetch('/getProducts', { method: "get" }).then((response) => {
                     return response.json();
                 }).then((data) => {
                     console.log(data);
-                    displayTodos(data);
+                    displayTodos(data); //check
                 });
             }
 
-            getTodos();
+         getProducts();
 
             const resetTodosInput = () => {
                 todoUserInput.val('');
             }
 
-            const editTodo = (todo, todoID, editID) => {
+            const editTodo = (products, prodID, editID) => {
                 let editBtn = $(`#${editID}`);
                 editBtn.click(() => {
-                    fetch(`/${todo._id}`, {
+                    fetch(`/${products._id}`, {
                         method: "put",
                         headers: {
                             "Content-Type": "application/json; charset=utf-8"
                         },
-                        body: JSON.stringify({ todo: todoUserInput.val() })
+                        body: JSON.stringify({ products: todoUserInput.val() })
                     }).then((response) => {
                         return response.json();
                     }).then((data) => {
                         if (data.ok == 1) {
-                            let todoIndex = $(`#${todoID}`);
-                            todoIndex.html(data.value.todo);
+                            let productIndex = $(`#${prodID}`);
+                            productIndex.html(data.value.products);
                             resetTodosInput();
                         }
                     });
                 });
             }
 
-            const deleteTodo = (todo, listItemID, deleteID) => {
+            const deleteTodo = (product, listItemID, deleteID) => {
                 let deleteBtn = $(`#${deleteID}`);
                 deleteBtn.click(() => {
-                    fetch(`/${todo._id}`, {
+                    fetch(`/${products._id}`, {
                         method: "delete"
                     }).then((response) => {
                         return response.json();
@@ -138,19 +138,19 @@
             }
 
 
-            const buildIDS = (todo) => {
+            const buildIDS = (products) => {
                 return {
-                    editID: "edit_" + todo._id,
-                    deleteID: "delete_" + todo._id,
-                    listItemID: "listItem_" + todo._id,
-                    todoID: "todo_" + todo._id
+                    editID: "edit_" + products._id,
+                    deleteID: "delete_" + products._id,
+                    listItemID: "listItem_" + products._id,
+                    prodID: "todo_" + products._id
                 }
             }
 
-            const buildTemplate = (todo, ids) => {
+            const buildTemplate = (products, ids) => {
                 return `<li class="list-group-item" id="${ids.listItemID}">
                             <div class="row">
-                                <div class="col-md-4" id="${ids.todoID}">${todo.todo}</div>
+                                <div class="col-md-4" id="${ids.prodID}">${products.name}</div>
                                 <div class="col-md-4"></div>
                                 <div class="col-md-4 text-right">
                                     <button type="button" class="btn btn-secondary" id="${ids.editID}">Edit</button>
@@ -161,11 +161,11 @@
             }
 
             const displayTodos = (data) => {
-                data.forEach((todo) => {
-                    let ids = buildIDS(todo);
-                    display.append(buildTemplate(todo, ids));
-                    editTodo(todo, ids.todoID, ids.editID);
-                    deleteTodo(todo, ids.listItemID, ids.deleteID);
+                data.forEach((products) => {
+                    let ids = buildIDS(products);
+                    display.append(buildTemplate(products, ids));
+                    editTodo(products, ids.prodID, ids.editID);
+                    deleteTodo(products, ids.listItemID, ids.deleteID);
                 });
             }
 
@@ -173,7 +173,7 @@
                 e.preventDefault();
                 fetch('/', {
                     method: 'post',
-                    body: JSON.stringify({ todo: todoUserInput.val() }),
+                    body: JSON.stringify({ products: todoUserInput.val() }),
                     headers: {
                         "Content-Type": "application/json; charset=utf-8"
                     }
