@@ -188,9 +188,10 @@ app.put("/:id", (req, res) => {
 //create
 app.post("/", (req, res) => {
   const userInput = req.body;
+
   db.getDB()
     .collection(collection)
-    .insertOne(userInput, (err, result) => {
+    .insert(userInput, (err, result) => {
       if (err) {
         console.log(err);
       } else {
