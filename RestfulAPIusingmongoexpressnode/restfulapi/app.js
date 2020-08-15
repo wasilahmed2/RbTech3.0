@@ -174,7 +174,7 @@ app.put("/:id", (req, res) => {
     .collection(collection)
     .findOneAndUpdate(
       { _id: db.getPrimaryKey(prodID) },
-      { $set: { name: userInput.name, price: userInput.price } },
+      { $set: { name: userInput.name, price: userInput.price, description: userInput.description } },
       { returnOriginal: false },
       (err, result) => {
         if (err) console.log(err);
