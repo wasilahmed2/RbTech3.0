@@ -2,29 +2,149 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <link rel="stylesheet" href="./styles.css">
-
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
 
-    <title>RB Tech Inventory Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto+Condensed:700" rel="stylesheet" />
+
+    <script src="https://use.fontawesome.com/ca5187534d.js"></script>
+
+    <style>
+        * {
+            font-family: "Poppins", sans-serif;
+        }
+
+        body,
+        html {
+            height: 100%;
+        }
+
+        body {
+            background-image: linear-gradient(rgba(255, 255, 153, 0.3),
+                    rgba(255, 255, 153, 0.3)),
+                url(https://i.imgur.com/yHpcZAn.jpg);
+            background-size: 100% 100%;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .header2 {
+            height: 10%;
+        }
+
+        .navbar::before {
+            content: "";
+            position: absolute;
+            top: 0%;
+            bottom: 0%;
+            left: 0;
+            right: 0;
+            z-index: -1;
+            background: linear-gradient(to right,
+                    #fafa5e77 0%,
+                    #fafa5e77 0%,
+                    #fafa5e77 100%);
+        }
+
+        .navbar-toggler {
+            border-radius: 0%;
+            cursor: pointer;
+        }
+
+        .navbar-nav {
+            margin-right: auto;
+        }
+
+        .loginnav {
+            margin-left: auto;
+        }
+
+        .custom-toggler .navbar-toggler-icon {
+            background-image: url(https://svgshare.com/i/Ndt.svg);
+        }
+
+        .custom-toggler.navbar-toggler {
+            border-color: rgb(0, 0, 0);
+        }
+
+        .nav-item a {
+            color: black;
+            font-weight: bold;
+        }
+
+        .container a {
+            color: black;
+            font-weight: bold;
+        }
+
+        .plabels {
+            color: black;
+            font-weight: bold;
+        }
+
+        #submitbtn {
+            color: black;
+            background: rgb(38, 250, 38);
+            border-color: rgb(38, 250, 38);
+            text-decoration: none;
+        }
+
+        #editbtn {
+            background-color: yellow;
+            color: black;
+            border-color: yellow
+        }
+
+        #delbtn {
+            background-color: black;
+            color: yellow;
+            border-color: black
+        }
+    </style>
+
+    <title>RB Inventory Dashboard</title>
 </head>
 
-<body style="background-image: linear-gradient(
-    rgba(255, 255, 153, 0.3),
-    rgba(255, 255, 153, 0.3)
-  ),
-  url(https://i.imgur.com/yHpcZAn.jpg);background-size: 100% 100%;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;">
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">RB Tech &amp; Games</a><button class="navbar-toggler custom-toggler"
+                type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Computers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/products">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/crud">Dashboard</a>
+                    </li>
+                </ul>
+                <ul class="loginnav nav navbar-nav navbar-right">
+                    <i class="fa fa-sign-in fa-lg" aria-hidden="true"></i>
+                    <li>
+                        <a class="loginbtn" type="submit" href="/">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
+    <section class="header2"></section>
 
     <div class="container">
         <div class="row">
@@ -32,207 +152,201 @@
             <div class="col-lg-8">
                 <form id="form">
                     <div class="form-group">
-                        <label for="todo" style="color: black; font-weight: bold;">Product Name</label>
+                        <label for="todo" class="plabels">Product Name</label>
                         <input type="text" class="form-control" id="todoUserInput" placeholder="Enter Product Name" />
-                        <label for="todo" style="color: black; font-weight: bold;">Product Price</label>
+                        <label for="todo" class="plabels">Product Price</label>
                         <input type="text" class="form-control" id="todoUserInput1" placeholder="Enter Product Price" />
-                        <label for="todo" style="color: black; font-weight: bold;">Product Description</label>
+                        <label for="todo" class="plabels">Product Description</label>
                         <input type="text" class="form-control" id="todoUserInput2"
                             placeholder="Enter Product Description" />
-                        <button type="submit" class="btn btn-primary" onclick="reloadPage()" style="color: black;
-                        background: rgb(38, 250, 38);
-                        border-color: rgb(38, 250, 38);
-                        text-decoration: none;">
+                        <button type="submit" class="btn btn-primary" id="submitbtn" onclick="reloadPage()"">
                             Add Product to Database
                         </button>
                     </div>
                 </form>
             </div>
-            <div class="col-lg-2"></div>
-        </div>
-        <div class="row">
-            <div class="col-lg-2"></div>
-            <div class="col-lg-8">
-                <ul class="list-group" id="display"></ul>
+            <div class=" col-lg-2"></div>
             </div>
-            <div class="col-lg-2"></div>
-        </div>
-        <br />
-        <div class="row">
-            <div class="col-lg-2"></div>
-            <div class="col-lg-8">
-                <div class="alert" role="alert" id="message"></div>
+            <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+                    <ul class="list-group" id="display"></ul>
+                </div>
+                <div class="col-lg-2"></div>
             </div>
-            <div class="col-lg-2"></div>
+            <br />
+            <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+                    <div class="alert" role="alert" id="message"></div>
+                </div>
+                <div class="col-lg-2"></div>
+            </div>
         </div>
-    </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(() => {
+                const display = $("#display");
+                const form = $("#form");
+                const todoUserInput = $("#todoUserInput");
+                const todoUserInput1 = $("#todoUserInput1");
+                const todoUserInput2 = $("#todoUserInput2");
+                const message = $("#message");
+                message.hide();
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
-    <script>
-        $(document).ready(() => {
-            const display = $("#display");
-            const form = $("#form");
-            const todoUserInput = $("#todoUserInput");
-            const todoUserInput1 = $("#todoUserInput1");
-            const todoUserInput2 = $("#todoUserInput2");
-            const message = $("#message");
-            message.hide();
-
-            const displayMessage = (flag, msg) => {
-                // successful
-                if (flag) {
-                    message.removeClass("alert-danger");
-                    message.addClass("alert-success");
-                    message.html(msg);
-                    message.show();
-                } else {
-                    message.removeClass("alert-success");
-                    message.addClass("alert-danger");
-                    message.html(msg);
-                    message.show();
-                }
-            };
-
-            const getProducts = () => {
-                fetch("/getProducts", { method: "get" })
-                    .then((response) => {
-                        return response.json();
-                    })
-                    .then((data) => {
-                        console.log(data);
-                        displayTodos(data);
-                    });
-            };
-
-            getProducts();
-
-            const resetTodosInput = () => {
-                todoUserInput.val("");
-            };
-
-            const editTodo = (products, todoID, editID) => {
-                let editBtn = $(`#${editID}`);
-                editBtn.click(() => {
-                    fetch(`/${products._id}`, {
-                        method: "put",
-                        headers: {
-                            "Content-Type": "application/json; charset=utf-8",
-                        },
-                        body: JSON.stringify({
-                            name: todoUserInput.val(),
-                            price: todoUserInput1.val(),
-                            description: todoUserInput2.val(),
-                        }),
-                    })
-                        .then((response) => {
-                            return response.json();
-                        })
-                        .then((data) => {
-                            if (data.ok == 1) {
-                                let todoIndex = $(`#${todoID}`);
-                                todoIndex.html(data.value.todo);
-                                resetTodosInput();
-                            }
-                        });
-                });
-            };
-
-            const deleteTodo = (todo, listItemID, deleteID) => {
-                let deleteBtn = $(`#${deleteID}`);
-                deleteBtn.click(() => {
-                    fetch(`/${todo._id}`, {
-                        method: "delete",
-                    })
-                        .then((response) => {
-                            return response.json();
-                        })
-                        .then((data) => {
-                            if (data.ok == 1) {
-                                $(`#${listItemID}`).remove();
-                            }
-                        });
-                });
-            };
-
-            const buildIDS = (products) => {
-                return {
-                    editID: "edit_" + products._id,
-                    deleteID: "delete_" + products._id,
-                    listItemID: "listItem_" + products._id,
-                    todoID: "todo_" + products._id,
+                const displayMessage = (flag, msg) => {
+                    // successful
+                    if (flag) {
+                        message.removeClass("alert-danger");
+                        message.addClass("alert-success");
+                        message.html(msg);
+                        message.show();
+                    } else {
+                        message.removeClass("alert-success");
+                        message.addClass("alert-danger");
+                        message.html(msg);
+                        message.show();
+                    }
                 };
-            };
 
-            const buildTemplate = (products, ids) => {
-                return `<li class="list-group-item" id="${ids.listItemID}">
+                const getProducts = () => {
+                    fetch("/getProducts", { method: "get" })
+                        .then((response) => {
+                            return response.json();
+                        })
+                        .then((data) => {
+                            console.log(data);
+                            displayTodos(data);
+                        });
+                };
+
+                getProducts();
+
+                const resetTodosInput = () => {
+                    todoUserInput.val("");
+                };
+
+                const editTodo = (products, todoID, editID) => {
+                    let editBtn = $(`#${editID}`);
+                    editBtn.click(() => {
+                        fetch(`/${products._id}`, {
+                            method: "put",
+                            headers: {
+                                "Content-Type": "application/json; charset=utf-8",
+                            },
+                            body: JSON.stringify({
+                                name: todoUserInput.val(),
+                                price: todoUserInput1.val(),
+                                description: todoUserInput2.val(),
+                            }),
+                        })
+                            .then((response) => {
+                                return response.json();
+                            })
+                            .then((data) => {
+                                if (data.ok == 1) {
+                                    let todoIndex = $(`#${todoID}`);
+                                    todoIndex.html(data.value.todo);
+                                    resetTodosInput();
+                                }
+                            });
+                    });
+                };
+
+                const deleteTodo = (todo, listItemID, deleteID) => {
+                    let deleteBtn = $(`#${deleteID}`);
+                    deleteBtn.click(() => {
+                        fetch(`/${todo._id}`, {
+                            method: "delete",
+                        })
+                            .then((response) => {
+                                return response.json();
+                            })
+                            .then((data) => {
+                                if (data.ok == 1) {
+                                    $(`#${listItemID}`).remove();
+                                }
+                            });
+                    });
+                };
+
+                const buildIDS = (products) => {
+                    return {
+                        editID: "edit_" + products._id,
+                        deleteID: "delete_" + products._id,
+                        listItemID: "listItem_" + products._id,
+                        todoID: "todo_" + products._id,
+                    };
+                };
+
+                const buildTemplate = (products, ids) => {
+                    return `<li class="list-group-item" id="${ids.listItemID}">
                             <div class="row">
                                 <div class="col-md-3" id="${ids.todoID}">${products.name}</div>
                                 <div class="col-md-3" id="${ids.todoID}">${products.price}</div>
                                 <div class="col-md-3" id="${ids.todoID}">${products.description}</div>
 
                                 <div class="col-md-3 text-right">
-                                    <button type="button" class="btn btn-secondary" onclick="reloadPage()" style="background-color: yellow; color: black; border-color: yellow" id="${ids.editID}">Edit</button>
-                                    <button type="button" class="btn btn-danger" onclick="reloadPage()" style="background-color: black; color: yellow; border-color: black" id="${ids.deleteID}">Delete</button>
+                                    <button type="button" class="btn btn-secondary" onclick="reloadPage()" id="editbtn"  id="${ids.editID}">Edit</button>
+                                    <button type="button" class="btn btn-danger" onclick="reloadPage()" id="delbtn"  id="${ids.deleteID}">Delete</button>
                                 </div>
                             </div>
                        </li>`;
-            };
+                };
 
-            const displayTodos = (data) => {
-                data.forEach((pd) => {
-                    let ids = buildIDS(pd);
-                    display.append(buildTemplate(pd, ids));
-                    editTodo(pd, ids.todoID, ids.editID);
-                    deleteTodo(pd, ids.listItemID, ids.deleteID);
-                });
-            };
-
-            form.submit((e) => {
-                e.preventDefault();
-                fetch("/", {
-                    method: "post",
-                    body: JSON.stringify({
-                        name: todoUserInput.val(),
-                        price: todoUserInput1.val(),
-                        description: todoUserInput2.val(),
-                    }),
-                    headers: {
-                        "Content-Type": "application/json; charset=utf-8",
-                    },
-                })
-                    .then((response) => {
-                        return response.json();
-                    })
-                    .then((data) => {
-                        if (!data.error) {
-                            if (data.result.ok == 1 && data.result.n == 1) {
-                                let ids = buildIDS(data.document);
-                                display.append(buildTemplate(data.document, ids));
-                                editTodo(data.document, ids.todoID, ids.editID);
-                                deleteTodo(data.document, ids.listItemID, ids.deleteID);
-                                displayMessage(true, data.msg);
-                            }
-                        } else displayMessage(false, data.error.message);
-
-                        resetTodosInput();
+                const displayTodos = (data) => {
+                    data.forEach((pd) => {
+                        let ids = buildIDS(pd);
+                        display.append(buildTemplate(pd, ids));
+                        editTodo(pd, ids.todoID, ids.editID);
+                        deleteTodo(pd, ids.listItemID, ids.deleteID);
                     });
-            });
-        });
+                };
 
-        function reloadPage() {
-            location.reload(true);
-        }
-    </script>
+                form.submit((e) => {
+                    e.preventDefault();
+                    fetch("/", {
+                        method: "post",
+                        body: JSON.stringify({
+                            name: todoUserInput.val(),
+                            price: todoUserInput1.val(),
+                            description: todoUserInput2.val(),
+                        }),
+                        headers: {
+                            "Content-Type": "application/json; charset=utf-8",
+                        },
+                    })
+                        .then((response) => {
+                            return response.json();
+                        })
+                        .then((data) => {
+                            if (!data.error) {
+                                if (data.result.ok == 1 && data.result.n == 1) {
+                                    let ids = buildIDS(data.document);
+                                    display.append(buildTemplate(data.document, ids));
+                                    editTodo(data.document, ids.todoID, ids.editID);
+                                    deleteTodo(data.document, ids.listItemID, ids.deleteID);
+                                    displayMessage(true, data.msg);
+                                }
+                            } else displayMessage(false, data.error.message);
+
+                            resetTodosInput();
+                        });
+                });
+            });
+
+            function reloadPage() {
+                location.reload(true);
+            }
+        </script>
 </body>
 
 </html>
