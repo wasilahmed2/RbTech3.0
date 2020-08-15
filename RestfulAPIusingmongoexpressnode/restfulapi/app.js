@@ -66,14 +66,14 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(bodyParser.json());
 
-app.get("/", checkAuthenticated, (req, res) => {
+app.get("/", (req, res) => {
   res.render("index.pug");
 });
 
-app.get("/products", checkAuthenticated, (req, res) => {
+app.get("/products", (req, res) => {
   res.render("products.pug");
 });
-app.get("/crud", (req, res) => {
+app.get("/crud", checkAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname,"crud.html"));
 });
 
@@ -85,7 +85,7 @@ app.post(
   "/login",
   checkNotAuthenticated,
   passport.authenticate("local", {
-    successRedirect: "/",
+    successRedirect: "/crud",
     failureRedirect: "/login",
     failureFlash: true,
   })
@@ -143,7 +143,7 @@ db.connect((err) => {
     console.log("unable to connect");
     process.exit(1);
   } else {
-    console.log("Connected");
+    console.log("Welcome");
   }
 });
 
@@ -236,7 +236,7 @@ function checkAuthenticated(req, res, next) {
 
 function checkNotAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
-    return res.redirect("/");
+    return res.redirect("/crud");
   }
   next();
 }
