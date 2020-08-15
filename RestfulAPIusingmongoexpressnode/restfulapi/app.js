@@ -53,8 +53,6 @@ app.use(
 
 //app.use(bodyParser.json());
 
-// serve static html file to user
-
 app.use(passport.initialize());
 app.use(passport.session());
 // app.use(methodOverride('_method')) //not working for logout
@@ -136,7 +134,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => console.log("Connected to Mongo...."))
-  .catch((error) => console.log(error.message)); //for logout not working
+  .catch((error) => console.log(error.message));
 
 db.connect((err) => {
   if (err) {
@@ -149,8 +147,6 @@ db.connect((err) => {
 
 // read
 app.get("/getProducts", (req, res) => {
-  // get all Todo documents within our todo collection
-  // send back to user as json
   db.getDB()
     .collection(collection)
     .find({})
@@ -165,11 +161,8 @@ app.get("/getProducts", (req, res) => {
 
 // update
 app.put("/:id", (req, res) => {
-  // Primary Key of Todo Document we wish to update
   const prodID = req.params.id;
-  // Document used to update
   const userInput = req.body;
-  // Find Document By ID and Update
   db.getDB()
     .collection(collection)
     .findOneAndUpdate(
@@ -205,15 +198,10 @@ app.post("/", (req, res) => {
       }
     });
 });
-// Validate document
-// If document is invalid pass to error middleware
-// else insert document within todo collection
 
 //delete
 app.delete("/:id", (req, res) => {
-  // Primary Key of Todo Document
   const prodID = req.params.id;
-  // Find Document By ID and delete document from record
   db.getDB()
     .collection(collection)
     .findOneAndDelete({ _id: db.getPrimaryKey(prodID) }, (err, result) => {

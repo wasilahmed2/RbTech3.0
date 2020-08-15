@@ -184,8 +184,6 @@
         </div>
     </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -202,10 +200,10 @@
             const todoUserInput = $("#todoUserInput");
             const todoUserInput1 = $("#todoUserInput1");
             const todoUserInput2 = $("#todoUserInput2");
-            const message = $("#message");
-            message.hide();
+            //const message = $("#message");
+            //message.hide();
 
-            const displayMessage = (flag, msg) => {
+            /* const displayMessage = (flag, msg) => {
                 // successful
                 if (flag) {
                     message.removeClass("alert-danger");
@@ -218,7 +216,7 @@
                     message.html(msg);
                     message.show();
                 }
-            };
+            }; */ //not yet displaying errors
 
             const getProducts = () => {
                 fetch("/getProducts", { method: "get" })
@@ -337,9 +335,9 @@
                                 display.append(buildTemplate(data.document, ids));
                                 editTodo(data.document, ids.todoID, ids.editID);
                                 deleteTodo(data.document, ids.listItemID, ids.deleteID);
-                                displayMessage(true, data.msg);
+                                //displayMessage(true, data.msg);
                             }
-                        } else displayMessage(false, data.error.message);
+                        } //else displayMessage(false, data.error.message);
 
                         resetTodosInput();
                     });
