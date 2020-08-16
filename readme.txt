@@ -44,11 +44,10 @@ Languages :
 --CSS
 --Javascript {JQuery + JSON}
 
-NOTE : node_modules folder is hidden from github so when you npm install every dependencies should install without issues.
+NOTE : This is a completely responsive web page. You can try it out.
 
-NOTE2 : DONOT REMOVE ".env" file because it won't run without it because i added a securtiy authorization to my project that without it the code won't run (it was in .gitignore but as Sir had to run it themselves i have to add it back again)
+NOTE2 : node_modules folder is hidden from github so when you npm install every dependencies should install without issues.
 
-NOTE3 : All rights reserved to RB TECH & GAMES and myself as this is accquired by them for their use and purpose and do ask before using this. 
+NOTE3 : DONOT REMOVE ".env" file because it won't run without it because i added a securtiy authorization to my project that without it the code won't run (it was in .gitignore but as Sir had to run it themselves i have to add it back again)
 
-
-
+NOTE4 : All rights reserved to RB TECH & GAMES and myself as this is accquired by them for their use and purpose and do ask before using this. 
