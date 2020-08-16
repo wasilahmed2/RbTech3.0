@@ -44,6 +44,8 @@ Languages :
 --CSS
 --Javascript {JQuery + JSON}
 
+REPO : https://github.com/wasilahmed2/RbTech3.0
+
 NOTE : This is a completely responsive web page. You can try it out.
 
 NOTE2 : node_modules folder is hidden from github so when you npm install every dependencies should install without issues.
