@@ -44,7 +44,11 @@ Languages :
 --CSS
 --Javascript {JQuery + JSON}
 
-REPO : https://github.com/wasilahmed2/RbTech3.0
+Assessment 1 : http://rbtech2.herokuapp.com/ {Repo : https://github.com/wasilahmed2/RbTech2}
+
+Assessment 2 : https://www.youtube.com/watch?v=Gfku4Ul28Yk
+
+Assessment 3 : {REPO : https://github.com/wasilahmed2/RbTech3.0}
 
 NOTE : This is a completely responsive web page. You can try it out.
 
