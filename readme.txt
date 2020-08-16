@@ -43,6 +43,10 @@ Languages :
 --HTML
 --CSS
 --Javascript {JQuery + JSON}
+--Node.js
+--MongoDB
+--Express
+
 
 Assessment 1 : http://rbtech2.herokuapp.com/ {Repo : https://github.com/wasilahmed2/RbTech2}
 
