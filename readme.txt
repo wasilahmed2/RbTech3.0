@@ -1,4 +1,4 @@
-Term project of Web technologies (Assessment 3) by Wasil and Talal (FA17-BCS-024-A & FA17-BCS-002-B)
+Term project of Web technologies (Assessment 3) by Wasil 
 
 Description:
 A complete project which is basically a computer parts and accesories store's website (fully responsive) named 'RB Tech & games'
